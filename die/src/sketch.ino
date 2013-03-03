@@ -14,7 +14,7 @@ const unsigned int buttonPin = 3;
 
 LcdDigit lcdDigit(segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin);
 Button   button(buttonPin);
-Die      die(lcdDigit, button, 6);
+Die      die(lcdDigit, button, 10);
 
 void setup()
 {
