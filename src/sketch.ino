@@ -1,5 +1,6 @@
 #include "lcd_digit.h"
 #include "button.h"
+#include "die.h"
 
 const unsigned int segment_a_pin = 11;
 const unsigned int segment_b_pin = 12;
@@ -13,28 +14,13 @@ const unsigned int buttonPin = 3;
 
 LcdDigit lcdDigit(segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin);
 Button   button(buttonPin);
-
-void rollRandomNumber(
-  const unsigned int min, const unsigned int max,
-  const unsigned int tries = 50, const unsigned int delay_time = 75
-) {
-  for(unsigned int i = 0; i < tries; i++) {
-    const unsigned int number = random(min, max);
-    lcdDigit.displayNumber(number);
-    delay(delay_time);
-  }
-}
+Die      die(lcdDigit, button, 6);
 
 void setup()
 {
-  randomSeed(analogRead(A0));
 }
-
-unsigned int previousSwitchState = LOW;
 
 void loop()
 {
-  if(button.isUpdated() && button.isPressed()) {
-    rollRandomNumber(1, 6);
-  }
+  die.run();
 }
