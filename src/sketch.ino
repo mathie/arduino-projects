@@ -6,17 +6,7 @@ const unsigned int segment_e_pin =  6;
 const unsigned int segment_f_pin =  9;
 const unsigned int segment_g_pin =  8;
 
-const unsigned int all_segments[] = {
-  segment_a_pin,
-  segment_b_pin,
-  segment_c_pin,
-  segment_d_pin,
-  segment_e_pin,
-  segment_g_pin,
-  segment_f_pin,
-  NULL
-};
-
+const unsigned int all[]   = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin, NULL };
 const unsigned int zero[]  = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin,                NULL };
 const unsigned int one[]   = {                segment_b_pin, segment_c_pin,                                                             NULL };
 const unsigned int two[]   = { segment_a_pin, segment_b_pin,                segment_d_pin, segment_e_pin,                segment_g_pin, NULL };
@@ -45,7 +35,7 @@ void clearSegments(const unsigned int segments[]) {
 }
 
 void clearAllSegments() {
-  clearSegments(all_segments);
+  clearSegments(all);
 }
 
 void lightSegments(const unsigned int segments[]) {
@@ -59,7 +49,7 @@ void displayNumber(const unsigned int number) {
 
 void setup()
 {
-  for(const unsigned int *segment = all_segments; *segment != NULL; segment++) {
+  for(const unsigned int *segment = all; *segment != NULL; segment++) {
     pinMode(*segment, OUTPUT);
   }
   clearAllSegments();
