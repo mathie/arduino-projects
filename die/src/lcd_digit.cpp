@@ -65,5 +65,11 @@ void LcdDigit::lightSegments(const unsigned int segments[]) const {
 
 void LcdDigit::displayNumber(const unsigned int number) const {
   clearAllSegments();
-  lightSegments(_numbers[number]);
+  lightSegments(segmentsForNumber(number));
+}
+
+const unsigned int *LcdDigit::segmentsForNumber(const unsigned int number) const {
+  const unsigned int numberOfNumbers = sizeof(_numbers) / sizeof(_numbers[0]);
+  const unsigned int boundedNumber = number % numberOfNumbers;
+  return _numbers[boundedNumber];
 }

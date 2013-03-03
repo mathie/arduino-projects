@@ -25,6 +25,7 @@ class LcdDigit {
   void clearSegments(const unsigned int segments[]) const;
   void clearAllSegments() const;
   void lightSegments(const unsigned int segments[]) const;
+  const unsigned int *segmentsForNumber(const unsigned int number) const;
 
   unsigned int _all[8];
   unsigned int _numbers[10][8];
