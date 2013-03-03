@@ -10,7 +10,7 @@ const unsigned int segment_g_pin =  8;
 
 LcdDigit lcdDigit(segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin);
 
-void displayRandomNumber(
+void rollRandomNumber(
   const unsigned int min, const unsigned int max,
   const unsigned int tries = 50, const unsigned int delay_time = 75
 ) {
@@ -28,6 +28,6 @@ void setup()
 
 void loop()
 {
-  displayRandomNumber(1, 6);
+  rollRandomNumber(1, 6);
   delay(10000);
 }
