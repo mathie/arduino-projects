@@ -8,18 +8,26 @@ const unsigned int segment_e_pin =  6;
 const unsigned int segment_f_pin =  9;
 const unsigned int segment_g_pin =  8;
 
-const unsigned int delay_time = 1000;
-
 LcdDigit lcdDigit(segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin);
+
+void displayRandomNumber(
+  const unsigned int min, const unsigned int max,
+  const unsigned int tries = 50, const unsigned int delay_time = 75
+) {
+  for(unsigned int i = 0; i < tries; i++) {
+    const unsigned int number = random(min, max);
+    lcdDigit.displayNumber(number);
+    delay(delay_time);
+  }
+}
 
 void setup()
 {
+  randomSeed(analogRead(A0));
 }
 
 void loop()
 {
-  for(unsigned int i = 0; i < 10; i++) {
-    lcdDigit.displayNumber(i);
-    delay(delay_time);
-  }
+  displayRandomNumber(1, 6);
+  delay(10000);
 }
