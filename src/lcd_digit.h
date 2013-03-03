@@ -1,6 +1,8 @@
 #ifndef LCD_DIGIT_H
 #define LCD_DIGIT_H
 
+#include <stddef.h>
+
 class LcdDigit {
   public:
   LcdDigit(
