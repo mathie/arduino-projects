@@ -13,10 +13,10 @@ const bool Button::isUpdated() {
   return updated;
 }
 
-const bool Button::isPressed() {
+const bool Button::isPressed() const {
   return _currentState == HIGH;
 }
 
-const unsigned int Button::readValue() {
+const unsigned int Button::readValue() const {
   return digitalRead(_inputPin);
 }

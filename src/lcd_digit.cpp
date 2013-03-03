@@ -38,32 +38,32 @@ void LcdDigit::setupNumber(
   segments[7] = NULL;
 }
 
-void LcdDigit::setupPins() {
+void LcdDigit::setupPins() const {
   for(const unsigned int *segment = _all; *segment != NULL; segment++) {
     pinMode(*segment, OUTPUT);
   }
   clearAllSegments();
 }
 
-void LcdDigit::digitalWriteSegments(const unsigned int segments[], const unsigned int level) {
+void LcdDigit::digitalWriteSegments(const unsigned int segments[], const unsigned int level) const {
   for(const unsigned int *segment = segments; *segment != NULL; segment++) {
     digitalWrite(*segment, level);
   }
 }
 
-void LcdDigit::clearSegments(const unsigned int segments[]) {
+void LcdDigit::clearSegments(const unsigned int segments[]) const {
   digitalWriteSegments(segments, HIGH);
 }
 
-void LcdDigit::clearAllSegments() {
+void LcdDigit::clearAllSegments() const {
   clearSegments(_all);
 }
 
-void LcdDigit::lightSegments(const unsigned int segments[]) {
+void LcdDigit::lightSegments(const unsigned int segments[]) const {
   digitalWriteSegments(segments, LOW);
 }
 
-void LcdDigit::displayNumber(const unsigned int number) {
+void LcdDigit::displayNumber(const unsigned int number) const {
   clearAllSegments();
   lightSegments(_numbers[number]);
 }

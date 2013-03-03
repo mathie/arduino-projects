@@ -13,16 +13,16 @@ class LcdDigit {
     const unsigned int segment_g_pin
   );
 
-  void displayNumber(const unsigned int number);
-  void clearNumber();
+  void displayNumber(const unsigned int number) const;
+  void clearNumber() const;
 
   private:
   void setupNumber(unsigned int segments[], const unsigned int a = NULL, const unsigned int b = NULL, const unsigned int c = NULL, const unsigned int d = NULL, const unsigned int e = NULL, const unsigned int f = NULL, const unsigned int g = NULL);
-  void setupPins();
-  void digitalWriteSegments(const unsigned int segments[], const unsigned int level);
-  void clearSegments(const unsigned int segments[]);
-  void clearAllSegments();
-  void lightSegments(const unsigned int segments[]);
+  void setupPins() const;
+  void digitalWriteSegments(const unsigned int segments[], const unsigned int level) const;
+  void clearSegments(const unsigned int segments[]) const;
+  void clearAllSegments() const;
+  void lightSegments(const unsigned int segments[]) const;
 
   unsigned int _all[8];
   unsigned int _numbers[10][8];

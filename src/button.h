@@ -6,10 +6,10 @@ class Button {
   Button(const unsigned int inputPin);
 
   const bool isUpdated();
-  const bool isPressed();
+  const bool isPressed() const;
 
   private:
-  const unsigned int readValue();
+  const unsigned int readValue() const;
 
   const unsigned int _inputPin;
   unsigned int _previousState, _currentState;
