@@ -8,6 +8,8 @@ const unsigned int segment_e_pin =  6;
 const unsigned int segment_f_pin =  9;
 const unsigned int segment_g_pin =  8;
 
+const unsigned int switch_pin = 3;
+
 LcdDigit lcdDigit(segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin);
 
 void rollRandomNumber(
@@ -23,11 +25,17 @@ void rollRandomNumber(
 
 void setup()
 {
+  pinMode(switch_pin, INPUT);
   randomSeed(analogRead(A0));
 }
 
+unsigned int previousSwitchState = LOW;
+
 void loop()
 {
-  rollRandomNumber(1, 6);
-  delay(10000);
+  const unsigned int switchState = digitalRead(switch_pin);
+  if(switchState != previousSwitchState && switchState == HIGH) {
+    rollRandomNumber(1, 6);
+  }
+  previousSwitchState = switchState;
 }
