@@ -1,5 +1,3 @@
-#define count_of(array) (sizeof(array)/sizeof(array[0]))
-
 const unsigned int segment_a_pin = 11;
 const unsigned int segment_b_pin = 12;
 const unsigned int segment_c_pin =  5;
@@ -19,16 +17,16 @@ const unsigned int all_segments[] = {
   NULL
 };
 
-const unsigned int zero[]  = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, NULL };
-const unsigned int one[]   = { segment_b_pin, segment_c_pin, NULL };
-const unsigned int two[]   = { segment_a_pin, segment_b_pin, segment_d_pin, segment_e_pin, segment_g_pin, NULL };
-const unsigned int three[] = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_g_pin, NULL };
-const unsigned int four[]  = { segment_b_pin, segment_c_pin, segment_f_pin, segment_g_pin, NULL };
-const unsigned int five[]  = { segment_a_pin, segment_c_pin, segment_d_pin, segment_f_pin, segment_g_pin, NULL };
-const unsigned int six[]   = { segment_a_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin, NULL };
-const unsigned int seven[] = { segment_a_pin, segment_b_pin, segment_c_pin, NULL };
+const unsigned int zero[]  = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin,                NULL };
+const unsigned int one[]   = {                segment_b_pin, segment_c_pin,                                                             NULL };
+const unsigned int two[]   = { segment_a_pin, segment_b_pin,                segment_d_pin, segment_e_pin,                segment_g_pin, NULL };
+const unsigned int three[] = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin,                               segment_g_pin, NULL };
+const unsigned int four[]  = {                segment_b_pin, segment_c_pin,                               segment_f_pin, segment_g_pin, NULL };
+const unsigned int five[]  = { segment_a_pin,                segment_c_pin, segment_d_pin,                segment_f_pin, segment_g_pin, NULL };
+const unsigned int six[]   = { segment_a_pin,                segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin, NULL };
+const unsigned int seven[] = { segment_a_pin, segment_b_pin, segment_c_pin,                                                             NULL };
 const unsigned int eight[] = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_e_pin, segment_f_pin, segment_g_pin, NULL };
-const unsigned int nine[]  = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin, segment_f_pin, segment_g_pin, NULL };
+const unsigned int nine[]  = { segment_a_pin, segment_b_pin, segment_c_pin, segment_d_pin,                segment_f_pin, segment_g_pin, NULL };
 
 const unsigned int *numbers[] = {
   zero, one, two, three, four, five, six, seven, eight, nine
