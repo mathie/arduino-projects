@@ -10,6 +10,19 @@ const unsigned int digitOn    = HIGH;
 const unsigned int segmentOff = HIGH;
 const unsigned int segmentOn  = LOW;
 
+const unsigned int numbers[][7] = {
+  { 1, 1, 1, 1, 1, 1, 0 }, // 0
+  { 0, 1, 1, 0, 0, 0, 0 }, // 1
+  { 1, 1, 0, 1, 1, 0, 1 }, // 2
+  { 1, 1, 1, 1, 0, 0, 1 }, // 3
+  { 0, 1, 1, 0, 0, 1, 1 }, // 4
+  { 1, 0, 1, 1, 0, 1, 1 }, // 5
+  { 1, 0, 1, 1, 1, 1, 1 }, // 6
+  { 1, 1, 1, 0, 0, 0, 0 }, // 7
+  { 1, 1, 1, 1, 1, 1, 1 }, // 8
+  { 1, 1, 1, 1, 0, 1, 1 }  // 9
+};
+
 void setup()
 {
   for(unsigned int i = 0; i < count_of(digitPins); i++) {
@@ -24,30 +37,13 @@ void setup()
   digitalWrite(dotPin, segmentOff);
 }
 
-void loop()
-{
+void displayNumber(const unsigned int number, const int dotPosition = -1) {
+  const unsigned int *digits[4];
 
-  const unsigned int numbers[][7] = {
-    { 1, 1, 1, 1, 1, 1, 0 }, // 0
-    { 0, 1, 1, 0, 0, 0, 0 }, // 1
-    { 1, 1, 0, 1, 1, 0, 1 }, // 2
-    { 1, 1, 1, 1, 0, 0, 1 }, // 3
-    { 0, 1, 1, 0, 0, 1, 1 }, // 4
-    { 1, 0, 1, 1, 0, 1, 1 }, // 5
-    { 1, 0, 1, 1, 1, 1, 1 }, // 6
-    { 1, 1, 1, 0, 0, 0, 0 }, // 7
-    { 1, 1, 1, 1, 1, 1, 1 }, // 8
-    { 1, 1, 1, 1, 0, 1, 1 }  // 9
-  };
-
-  const unsigned int *digits[] = {
-    numbers[3],
-    numbers[1],
-    numbers[4],
-    numbers[1]
-  };
-
-  const unsigned int dotPosition = 0;
+  digits[0] = numbers[(number / 1000) % 10];
+  digits[1] = numbers[(number /  100) % 10];
+  digits[2] = numbers[(number /   10) % 10];
+  digits[3] = numbers[(number /    1) % 10];
 
   for(unsigned int segment = 0; segment < count_of(segmentPins); segment++) {
     digitalWrite(segmentPins[segment], segmentOn);
@@ -78,4 +74,9 @@ void loop()
   }
 
   digitalWrite(dotPin, segmentOff);
+}
+
+void loop()
+{
+  displayNumber(5678, 0);
 }
