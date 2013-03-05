@@ -20,6 +20,7 @@ void setup()
     pinMode(segmentPins[i], OUTPUT);
     digitalWrite(segmentPins[i], segmentOff);
   }
+  pinMode(dotPin, OUTPUT);
   digitalWrite(dotPin, segmentOff);
 }
 
@@ -46,6 +47,8 @@ void loop()
     numbers[1]
   };
 
+  const unsigned int dotPosition = 0;
+
   for(unsigned int segment = 0; segment < count_of(segmentPins); segment++) {
     digitalWrite(segmentPins[segment], segmentOn);
 
@@ -61,4 +64,18 @@ void loop()
 
     digitalWrite(segmentPins[segment], segmentOff);
   }
+
+  digitalWrite(dotPin, segmentOn);
+
+  for(unsigned int digit = 0; digit < count_of(digitPins); digit++) {
+    if(digit == dotPosition) {
+      digitalWrite(digitPins[digit], digitOn);
+    }
+  }
+
+  for(unsigned int digit = 0; digit < count_of(digitPins); digit++) {
+    digitalWrite(digitPins[digit], digitOff);
+  }
+
+  digitalWrite(dotPin, segmentOff);
 }
