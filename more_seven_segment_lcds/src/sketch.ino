@@ -43,18 +43,29 @@ void setup()
 }
 
 void displayNumber(const unsigned int number, const int dotPosition = -1) {
-  const unsigned int *digits[4];
+  unsigned int digits[4], significantDigit[4];
+  const unsigned int *segments[4];
 
-  digits[0] = numbers[(number / 1000) % 10];
-  digits[1] = numbers[(number /  100) % 10];
-  digits[2] = numbers[(number /   10) % 10];
-  digits[3] = numbers[(number /    1) % 10];
+  digits[0] = (number / 1000) % 10;
+  digits[1] = (number /  100) % 10;
+  digits[2] = (number /   10) % 10;
+  digits[3] = (number /    1) % 10;
+
+  segments[0] = numbers[digits[0]];
+  segments[1] = numbers[digits[1]];
+  segments[2] = numbers[digits[2]];
+  segments[3] = numbers[digits[3]];
+
+  significantDigit[0] = (digits[0] > 0);
+  significantDigit[1] = significantDigit[0] || (digits[1] > 0);
+  significantDigit[2] = significantDigit[1] || (digits[2] > 0);
+  significantDigit[3] = significantDigit[2] || (digits[3] > 0);
 
   for(unsigned int segment = 0; segment < count_of(segmentPins); segment++) {
     digitalWrite(segmentPins[segment], segmentOn);
 
     for(unsigned int digit = 0; digit < count_of(digitPins); digit++) {
-      if(digits[digit][segment]) {
+      if(significantDigit[digit] && segments[digit][segment]) {
         digitalWrite(digitPins[digit], digitOn);
       }
     }
