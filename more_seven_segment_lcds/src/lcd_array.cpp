@@ -62,6 +62,8 @@ void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
   _significantDigit[3] = _significantDigit[2] || (digits[3] > 0);
 
   _dotPosition = dotPosition;
+
+  refreshNumber();
 }
 
 void LcdArray::refreshNumber() {
