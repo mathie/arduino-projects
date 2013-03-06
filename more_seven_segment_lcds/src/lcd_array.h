@@ -4,7 +4,9 @@
 class LcdArray {
   public:
   LcdArray(const unsigned int digitPins[], const unsigned int segmentPins[], const unsigned int dpSegmentPin);
-  void displayNumber(const unsigned int number, const int dotPosition = -1);
+
+  void changeNumber(const unsigned int number, const int dotPosition = -1);
+  void refreshNumber();
 
   private:
   void setup();
@@ -12,6 +14,10 @@ class LcdArray {
   const unsigned int *_digitPins;
   const unsigned int *_segmentPins;
   const unsigned int _dpSegmentPin;
+
+  const unsigned int *_segments[4];
+  unsigned int _significantDigit[4];
+  unsigned int _dotPosition;
 
   unsigned int _digitPinCount;
 

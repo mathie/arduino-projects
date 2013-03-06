@@ -43,30 +43,33 @@ void LcdArray::setup() {
   digitalWrite(_dpSegmentPin, _segmentOff);
 }
 
-void LcdArray::displayNumber(const unsigned int number, const int dotPosition) {
-  unsigned int digits[4], significantDigit[4];
-  const unsigned int *segments[4];
+void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
+  unsigned int digits[4];
 
   digits[0] = (number / 1000) % 10;
   digits[1] = (number /  100) % 10;
   digits[2] = (number /   10) % 10;
   digits[3] = (number /    1) % 10;
 
-  segments[0] = _numbers[digits[0]];
-  segments[1] = _numbers[digits[1]];
-  segments[2] = _numbers[digits[2]];
-  segments[3] = _numbers[digits[3]];
+  _segments[0] = _numbers[digits[0]];
+  _segments[1] = _numbers[digits[1]];
+  _segments[2] = _numbers[digits[2]];
+  _segments[3] = _numbers[digits[3]];
 
-  significantDigit[0] = (digits[0] > 0);
-  significantDigit[1] = significantDigit[0] || (digits[1] > 0);
-  significantDigit[2] = significantDigit[1] || (digits[2] > 0);
-  significantDigit[3] = significantDigit[2] || (digits[3] > 0);
+  _significantDigit[0] = (digits[0] > 0);
+  _significantDigit[1] = _significantDigit[0] || (digits[1] > 0);
+  _significantDigit[2] = _significantDigit[1] || (digits[2] > 0);
+  _significantDigit[3] = _significantDigit[2] || (digits[3] > 0);
 
+  _dotPosition = dotPosition;
+}
+
+void LcdArray::refreshNumber() {
   for(unsigned int segment = 0; segment < _segmentPinCount; segment++) {
     digitalWrite(_segmentPins[segment], _segmentOn);
 
     for(unsigned int digit = 0; digit < _digitPinCount; digit++) {
-      if(significantDigit[digit] && segments[digit][segment]) {
+      if(_significantDigit[digit] && _segments[digit][segment]) {
         digitalWrite(_digitPins[digit], _digitOn);
       }
     }
@@ -81,7 +84,7 @@ void LcdArray::displayNumber(const unsigned int number, const int dotPosition) {
   digitalWrite(_dpSegmentPin, _segmentOn);
 
   for(unsigned int digit = 0; digit < _digitPinCount; digit++) {
-    if(digit == dotPosition) {
+    if(digit == _dotPosition) {
       digitalWrite(_digitPins[digit], _digitOn);
     }
   }

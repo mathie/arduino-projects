@@ -8,15 +8,15 @@ const unsigned int dpSegmentPin = 12;
 
 LcdArray lcdArray(digitPins, segmentPins, dpSegmentPin);
 
-unsigned int randomNumber;
-
 void setup()
 {
   randomSeed(analogRead(A0));
-  randomNumber = random(1, 2000);
+  const unsigned int randomNumber = random(1, 2000);
+
+  lcdArray.changeNumber(randomNumber, 0);
 }
 
 void loop()
 {
-  lcdArray.displayNumber(randomNumber, 0);
+  lcdArray.refreshNumber();
 }
