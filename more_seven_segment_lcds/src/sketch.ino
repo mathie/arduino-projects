@@ -23,6 +23,8 @@ const unsigned int numbers[][7] = {
   { 1, 1, 1, 1, 0, 1, 1 }  // 9
 };
 
+unsigned int randomNumber;
+
 void setup()
 {
   for(unsigned int i = 0; i < count_of(digitPins); i++) {
@@ -35,6 +37,9 @@ void setup()
   }
   pinMode(dotPin, OUTPUT);
   digitalWrite(dotPin, segmentOff);
+
+  randomSeed(analogRead(A0));
+  randomNumber = random(1, 2000);
 }
 
 void displayNumber(const unsigned int number, const int dotPosition = -1) {
@@ -78,5 +83,5 @@ void displayNumber(const unsigned int number, const int dotPosition = -1) {
 
 void loop()
 {
-  displayNumber(5678, 0);
+  displayNumber(randomNumber);
 }
