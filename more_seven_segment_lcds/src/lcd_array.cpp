@@ -44,22 +44,17 @@ void LcdArray::setup() {
 }
 
 void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
-  unsigned int digits[4];
+  unsigned int digits[_digitPinCount];
 
-  digits[0] = (number / 1000) % 10;
-  digits[1] = (number /  100) % 10;
-  digits[2] = (number /   10) % 10;
-  digits[3] = (number /    1) % 10;
+  bool previousDigitIsSignificant = false;
+  for(unsigned int i = 0; i < _digitPinCount; i++) {
+    unsigned int power = (unsigned int)pow((double)10, (double)(_digitPinCount - i - 1));
+    digits[i] = (number / power) % 10;
 
-  _segments[0] = _numbers[digits[0]];
-  _segments[1] = _numbers[digits[1]];
-  _segments[2] = _numbers[digits[2]];
-  _segments[3] = _numbers[digits[3]];
+    _segments[i] = _numbers[digits[i]];
 
-  _significantDigit[0] = (digits[0] > 0);
-  _significantDigit[1] = _significantDigit[0] || (digits[1] > 0);
-  _significantDigit[2] = _significantDigit[1] || (digits[2] > 0);
-  _significantDigit[3] = _significantDigit[2] || (digits[3] > 0);
+    previousDigitIsSignificant = _significantDigit[i] = previousDigitIsSignificant || (digits[i] > 0);
+  }
 
   _dotPosition = dotPosition;
 

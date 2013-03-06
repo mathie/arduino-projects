@@ -15,6 +15,7 @@ class LcdArray {
   const unsigned int *_segmentPins;
   const unsigned int _dpSegmentPin;
 
+  // FIXME: This is the only place that still assumes a maximum of 4 digits.
   const unsigned int *_segments[4];
   unsigned int _significantDigit[4];
   unsigned int _dotPosition;
