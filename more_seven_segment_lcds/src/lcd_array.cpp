@@ -56,6 +56,9 @@ void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
     previousDigitIsSignificant = _significantDigit[i] = previousDigitIsSignificant || (digits[i] > 0);
   }
 
+  // Last digit is always significant or 0 doesn't show up!
+  _significantDigit[_digitPinCount - 1] = true;
+
   _dotPosition = dotPosition;
 
   refreshNumber();
