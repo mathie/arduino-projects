@@ -11,6 +11,9 @@ class LcdArray {
   private:
   void setup();
 
+  void refreshDigits();
+  void refreshDecimalPoint();
+
   const unsigned int *_digitPins;
   const unsigned int *_segmentPins;
   const unsigned int _dpSegmentPin;

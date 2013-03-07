@@ -64,7 +64,7 @@ void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
   refreshNumber();
 }
 
-void LcdArray::refreshNumber() {
+void LcdArray::refreshDigits() {
   for(unsigned int segment = 0; segment < _segmentPinCount; segment++) {
     digitalWrite(_segmentPins[segment], _segmentOn);
 
@@ -80,7 +80,9 @@ void LcdArray::refreshNumber() {
 
     digitalWrite(_segmentPins[segment], _segmentOff);
   }
+}
 
+void LcdArray::refreshDecimalPoint() {
   digitalWrite(_dpSegmentPin, _segmentOn);
 
   for(unsigned int digit = 0; digit < _digitPinCount; digit++) {
@@ -94,4 +96,9 @@ void LcdArray::refreshNumber() {
   }
 
   digitalWrite(_dpSegmentPin, _segmentOff);
+}
+
+void LcdArray::refreshNumber() {
+  refreshDigits();
+  refreshDecimalPoint();
 }
