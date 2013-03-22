@@ -1,3 +1,5 @@
+// vim: set ft=arduino:
+
 #ifndef LCD_ARRAY_H
 #define LCD_ARRAY_H
 

@@ -1,3 +1,5 @@
+// vim: set ft=arduino:
+
 #include "lcd_array.h"
 
 #include <Arduino.h>
