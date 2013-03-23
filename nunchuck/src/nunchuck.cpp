@@ -9,14 +9,32 @@ void Nunchuck::setup() {
   handshake();
 }
 
-void Nunchuck::printUpdate() {
-  update();
+const unsigned int Nunchuck::getJoystickX() const {
+  return _buffer[0];
+}
 
-  for (unsigned int currentByte = 0; currentByte < 6; currentByte++) {
-    Serial.print(_buffer[currentByte]);
-    Serial.print(' ');
-  }
-  Serial.println('x');
+const unsigned int Nunchuck::getJoystickY() const {
+  return _buffer[1];
+}
+
+const unsigned int Nunchuck::getXAcceleration() const {
+  return (_buffer[2] << 2) | ((_buffer[5] >> 2) & 0x03);
+}
+
+const unsigned int Nunchuck::getYAcceleration() const {
+  return (_buffer[3] << 2) | ((_buffer[5] >> 4) & 0x03);
+}
+
+const unsigned int Nunchuck::getZAcceleration() const {
+  return (_buffer[4] << 2) | ((_buffer[5] >> 6) & 0x03);
+}
+
+const bool Nunchuck::getCButton() const {
+  return !(_buffer[5] & 0x01);
+}
+
+const bool Nunchuck::getZButton() const {
+  return !(_buffer[5] & 0x02);
 }
 
 void Nunchuck::handshake() {

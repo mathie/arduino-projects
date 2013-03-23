@@ -7,13 +7,19 @@
 
 class Nunchuck {
   public:
-
   void setup();
-  void printUpdate();
+  bool update();
+
+  const unsigned int getJoystickX() const;
+  const unsigned int getJoystickY() const;
+  const unsigned int getXAcceleration() const;
+  const unsigned int getYAcceleration() const;
+  const unsigned int getZAcceleration() const;
+  const bool getCButton() const;
+  const bool getZButton() const;
 
   private:
   void handshake();
-  bool update();
 
   void sendHandshakeCommand();
   void sendUpdateCommand();
