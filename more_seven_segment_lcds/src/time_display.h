@@ -9,6 +9,7 @@ class TimeDisplay {
   public:
   TimeDisplay(LcdArray *lcdArray);
 
+  void reset();
   void refresh();
 
   private:

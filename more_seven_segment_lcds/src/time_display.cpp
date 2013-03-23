@@ -9,8 +9,11 @@ TimeDisplay::TimeDisplay(LcdArray *lcdArray)
   : _lcdArray(lcdArray)
 {
   _previousTime = micros();
-  _currentTimeInSeconds = 0;
+  reset();
+}
 
+void TimeDisplay::reset() {
+  _currentTimeInSeconds = 0;
   changeNumber();
 }
 
