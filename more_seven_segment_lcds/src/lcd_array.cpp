@@ -22,11 +22,10 @@ const unsigned int LcdArray::_digitOn    = HIGH;
 const unsigned int LcdArray::_segmentOff = HIGH;
 const unsigned int LcdArray::_segmentOn  = LOW;
 
-LcdArray::LcdArray(const unsigned int digitPins[], const unsigned int segmentPins[], const unsigned int dpSegmentPin, const unsigned int lDigitPin, const unsigned int lSegmentPins[])
-  : _digitPins(digitPins), _segmentPins(segmentPins), _dpSegmentPin(dpSegmentPin), _lDigitPin(lDigitPin), _lSegmentPins(lSegmentPins)
+LcdArray::LcdArray(const unsigned int digitPins[], const unsigned int segmentPins[], const unsigned int dpSegmentPin)
+  : _digitPins(digitPins), _segmentPins(segmentPins), _dpSegmentPin(dpSegmentPin)
 {
   for(_digitPinCount = 0; _digitPins[_digitPinCount] != NULL; _digitPinCount++);
-  for(_lSegmentPinCount = 0; _lSegmentPins[_lSegmentPinCount] != NULL; _lSegmentPinCount++);
 
   setup();
 }
@@ -37,9 +36,6 @@ void LcdArray::setup() {
     digitalWrite(_digitPins[i], _digitOff);
   }
 
-  pinMode(_lDigitPin, OUTPUT);
-  digitalWrite(_lDigitPin, _digitOff);
-
   for(unsigned int i = 0; i < _segmentPinCount; i++) {
     pinMode(_segmentPins[i], OUTPUT);
     digitalWrite(_segmentPins[i], _segmentOff);
@@ -47,14 +43,9 @@ void LcdArray::setup() {
 
   pinMode(_dpSegmentPin, OUTPUT);
   digitalWrite(_dpSegmentPin, _segmentOff);
-
-  for(unsigned int i = 0; i < _lSegmentPinCount; i++) {
-    pinMode(_lSegmentPins[i], OUTPUT);
-    digitalWrite(_lSegmentPins[i], _segmentOff);
-  }
 }
 
-void LcdArray::changeNumber(const unsigned int number, const bool *lSegments, const int dotPosition) {
+void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
   unsigned int digits[_digitPinCount];
 
   bool previousDigitIsSignificant = false;
@@ -71,10 +62,6 @@ void LcdArray::changeNumber(const unsigned int number, const bool *lSegments, co
   _significantDigit[_digitPinCount - 1] = true;
 
   _dotPosition = dotPosition;
-
-  for(unsigned int i = 0; i < _lSegmentPinCount; i++) {
-    _lSegments[i] = lSegments[i];
-  }
 
   refreshNumber();
 }
@@ -113,22 +100,7 @@ void LcdArray::refreshDecimalPoint() {
   digitalWrite(_dpSegmentPin, _segmentOff);
 }
 
-void LcdArray::refreshAdditionalLights() {
-  for(unsigned int segment = 0; segment < _lSegmentPinCount; segment++) {
-    digitalWrite(_lSegmentPins[segment], _segmentOn);
-
-    for(unsigned int digit = 0; digit < _digitPinCount; digit++) {
-      digitalWrite(_lDigitPin, _digitOn);
-    }
-
-    digitalWrite(_lDigitPin, _digitOff);
-
-    digitalWrite(_segmentPins[segment], _segmentOff);
-  }
-}
-
 void LcdArray::refreshNumber() {
   refreshDigits();
   refreshDecimalPoint();
-  refreshAdditionalLights();
 }
