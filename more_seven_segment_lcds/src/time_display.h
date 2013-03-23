@@ -14,6 +14,13 @@ class TimeDisplay {
   private:
   LcdArray *_lcdArray;
   unsigned long _previousTime;
+  unsigned long _currentTimeInSeconds;
+
+  bool shouldTick();
+  void changeNumber();
+  const unsigned long representation();
+  const unsigned long currentMinutes();
+  const unsigned long currentSeconds();
 
   static const unsigned long _oneSecond = 1000000;
 };

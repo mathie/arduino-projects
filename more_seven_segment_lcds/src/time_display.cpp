@@ -9,21 +9,41 @@ TimeDisplay::TimeDisplay(LcdArray *lcdArray)
   : _lcdArray(lcdArray)
 {
   _previousTime = micros();
-  _lcdArray->changeNumber(0, 1);
+  _currentTimeInSeconds = 0;
+
+  changeNumber();
 }
 
 void TimeDisplay::refresh() {
-  const unsigned long currentTime = micros();
-  if (currentTime >= (_previousTime + _oneSecond)) {
-    _previousTime = currentTime;
-
-    const unsigned long currentTimeInSeconds = currentTime / _oneSecond;
-    const unsigned long seconds = currentTimeInSeconds % 60;
-    const unsigned long minutes = currentTimeInSeconds / 60;
-    const unsigned long representation = (minutes * 100) + seconds;
-    _lcdArray->changeNumber(representation, 1);
+  if(shouldTick()) {
+    _currentTimeInSeconds++;
+    changeNumber();
   }
 
   _lcdArray->refreshNumber();
 }
 
+bool TimeDisplay::shouldTick() {
+  const unsigned long currentTime = micros();
+  if (currentTime >= (_previousTime + _oneSecond)) {
+    _previousTime = currentTime;
+    return true;
+  }
+  return false;
+}
+
+void TimeDisplay::changeNumber() {
+  _lcdArray->changeNumber(representation(), 1);
+}
+
+const unsigned long TimeDisplay::representation() {
+  return currentMinutes() * 100 + currentSeconds();
+}
+
+const unsigned long TimeDisplay::currentMinutes() {
+  return _currentTimeInSeconds / 60;
+}
+
+const unsigned long TimeDisplay::currentSeconds() {
+  return _currentTimeInSeconds % 60;
+}
