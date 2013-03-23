@@ -35,18 +35,18 @@ bool TimeDisplay::shouldTick() {
   return false;
 }
 
-void TimeDisplay::changeNumber() {
+void TimeDisplay::changeNumber() const {
   _lcdArray->changeNumber(representation(), 1);
 }
 
-const unsigned long TimeDisplay::representation() {
+const unsigned long TimeDisplay::representation() const {
   return currentMinutes() * 100 + currentSeconds();
 }
 
-const unsigned long TimeDisplay::currentMinutes() {
+const unsigned long TimeDisplay::currentMinutes() const {
   return _currentTimeInSeconds / 60;
 }
 
-const unsigned long TimeDisplay::currentSeconds() {
+const unsigned long TimeDisplay::currentSeconds() const {
   return _currentTimeInSeconds % 60;
 }

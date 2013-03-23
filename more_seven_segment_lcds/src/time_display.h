@@ -18,10 +18,10 @@ class TimeDisplay {
   unsigned long _currentTimeInSeconds;
 
   bool shouldTick();
-  void changeNumber();
-  const unsigned long representation();
-  const unsigned long currentMinutes();
-  const unsigned long currentSeconds();
+  void changeNumber() const;
+  const unsigned long representation() const;
+  const unsigned long currentMinutes() const;
+  const unsigned long currentSeconds() const;
 
   static const unsigned long _oneSecond = 1000000;
 };
