@@ -12,9 +12,27 @@ TimeDisplay::TimeDisplay(LcdArray *lcdArray)
   reset();
 }
 
+void TimeDisplay::toggle() {
+  if (_isRunning) {
+    stop();
+  } else {
+    start();
+  }
+}
+
+void TimeDisplay::stop() {
+  _isRunning = false;
+}
+
+void TimeDisplay::start() {
+  _isRunning = true;
+  _previousTime = micros();
+}
+
 void TimeDisplay::reset() {
   _currentTimeInSeconds = 0;
   changeNumber();
+  stop();
 }
 
 void TimeDisplay::refresh() {
@@ -28,7 +46,7 @@ void TimeDisplay::refresh() {
 
 bool TimeDisplay::shouldTick() {
   const unsigned long currentTime = micros();
-  if (currentTime >= (_previousTime + _oneSecond) || (currentTime < _previousTime)) {
+  if (_isRunning && (currentTime >= (_previousTime + _oneSecond) || (currentTime < _previousTime))) {
     _previousTime = currentTime;
     return true;
   }

@@ -10,12 +10,16 @@ class TimeDisplay {
   TimeDisplay(LcdArray *lcdArray);
 
   void reset();
+  void toggle();
+  void stop();
+  void start();
   void refresh();
 
   private:
   LcdArray *_lcdArray;
   unsigned long _previousTime;
   unsigned long _currentTimeInSeconds;
+  bool _isRunning;
 
   bool shouldTick();
   void changeNumber() const;
