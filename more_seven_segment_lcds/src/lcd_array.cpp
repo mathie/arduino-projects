@@ -55,7 +55,7 @@ void LcdArray::changeNumber(const unsigned int number, const int dotPosition) {
 
     _segments[i] = _numbers[digits[i]];
 
-    previousDigitIsSignificant = _significantDigit[i] = previousDigitIsSignificant || (digits[i] > 0);
+    previousDigitIsSignificant = _significantDigit[i] = previousDigitIsSignificant || (digits[i] > 0) || (i == dotPosition);
   }
 
   // Last digit is always significant or 0 doesn't show up!
