@@ -25,7 +25,7 @@ void TimeDisplay::refresh() {
 
 bool TimeDisplay::shouldTick() {
   const unsigned long currentTime = micros();
-  if (currentTime >= (_previousTime + _oneSecond)) {
+  if (currentTime >= (_previousTime + _oneSecond) || (currentTime < _previousTime)) {
     _previousTime = currentTime;
     return true;
   }
