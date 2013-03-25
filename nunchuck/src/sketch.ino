@@ -1,4 +1,5 @@
 #include "nunchuck.h"
+#include "nunchuck_status.h"
 
 Nunchuck nunchuck;
 
@@ -10,24 +11,26 @@ void setup()
 
 void loop()
 {
-  nunchuck.update();
+  NunchuckStatus *status = nunchuck.getStatus();
 
   Serial.print("joystick = ");
-  Serial.print(nunchuck.getJoystickX());
+  Serial.print(status->getJoystickX());
   Serial.print(',');
-  Serial.println(nunchuck.getJoystickY());
+  Serial.println(status->getJoystickY());
 
   Serial.print("Acceleration = ");
-  Serial.print(nunchuck.getXAcceleration());
+  Serial.print(status->getXAcceleration());
   Serial.print(',');
-  Serial.print(nunchuck.getYAcceleration());
+  Serial.print(status->getYAcceleration());
   Serial.print(',');
-  Serial.println(nunchuck.getZAcceleration());
+  Serial.println(status->getZAcceleration());
 
   Serial.print("button c = ");
-  Serial.println(nunchuck.getCButton());
+  Serial.println(status->getCButton());
   Serial.print("button z = ");
-  Serial.println(nunchuck.getZButton());
+  Serial.println(status->getZButton());
+
+  delete status;
 
   delay(1000);
 }
